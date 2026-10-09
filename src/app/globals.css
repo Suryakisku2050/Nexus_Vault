@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #090e17; /* Dark navy */
+  --surface: #121826;     /* Card surface */
+  --surface-hover: #1b2336;
+  --border: #1e293b;
+  --foreground: #f8fafc;
+  --muted: #94a3b8;
+  --primary: #8b5cf6;     /* Purple accent */
+  --primary-hover: #7c3aed;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom Utilities */
+@utility panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+/* Solana Wallet Adapter Overrides */
+.nexus-wallet-btn .wallet-adapter-button-trigger {
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  transition: all 0.2s;
+  height: 44px; /* Matches our py-2.5 standard button height roughly */
+  padding: 0 1.25rem;
+}
+
+.nexus-wallet-btn .wallet-adapter-button-trigger:hover {
+  background-color: var(--primary-hover);
+  background-image: none; /* override their default hover */
+}
+
+/* Wallet adapter modal tweaks */
+.wallet-adapter-modal-wrapper {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.wallet-adapter-modal-title {
+  color: var(--foreground);
+}
+
+.wallet-adapter-modal-button-close {
+  background-color: var(--surface-hover);
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button {
+  color: var(--foreground);
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button:hover {
+  background-color: var(--surface-hover);
 }
