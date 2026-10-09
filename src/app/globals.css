@@ -1,28 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #090e17; /* Dark navy */
-  --surface: #121826;     /* Card surface */
-  --surface-hover: #1b2336;
-  --border: #1e293b;
-  --foreground: #f8fafc;
-  --muted: #94a3b8;
-  --primary: #8b5cf6;     /* Purple accent */
-  --primary-hover: #7c3aed;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
+  --background: #ECEAE3;
+  --surface: #F8F7F3;
+  --surface-hover: #EBE9DF;
+  --surface-subtle: #F3F1EB;
+  --border: #DDDBCF;
+  --border-subtle: #E6E4D9;
+  --foreground: #1D221C;
+  --muted: #6C7065;
+  --muted-light: #94998E;
+  --primary: #2E5627;
+  --primary-hover: #23461D;
+  --accent-sage: #DFEAD7;
+  --accent-sage-text: #274C20;
+  --success: #2E8B3A;
+  --warning: #C67D0A;
+  --danger: #B9382F;
 }
 
 @theme inline {
+  --font-serif: "Newsreader", "Instrument Serif", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, SFMono-Regular, monospace;
+
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
+  --color-surface-subtle: var(--surface-subtle);
   --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
+  --color-accent-sage: var(--accent-sage);
+  --color-accent-sage-text: var(--accent-sage-text);
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-danger: var(--danger);
@@ -31,49 +46,84 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Utilities */
-@utility panel {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
+/* Backyard noise & etching watermarks */
+.backyard-card-bg {
+  position: relative;
+  overflow: hidden;
 }
 
-/* Solana Wallet Adapter Overrides */
+.backyard-card-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  opacity: 0.045;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 20% 50%, #1D221C 1px, transparent 1px),
+    radial-gradient(circle at 60% 80%, #2E5627 1.5px, transparent 1.5px);
+  background-size: 16px 16px, 24px 24px;
+}
+
+/* Solana Wallet Adapter Overrides to match Backyard Finance */
+.wallet-adapter-button {
+  font-family: var(--font-sans) !important;
+}
+
 .nexus-wallet-btn .wallet-adapter-button-trigger {
-  background-color: var(--primary);
-  border-radius: 0.5rem;
-  font-family: inherit;
-  transition: all 0.2s;
-  height: 44px; /* Matches our py-2.5 standard button height roughly */
-  padding: 0 1.25rem;
+  background-color: #F8F7F3 !important;
+  color: #1D221C !important;
+  border: 1px solid #DDDBCF !important;
+  border-radius: 9999px !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  height: 38px !important;
+  line-height: 38px !important;
+  padding: 0 1.125rem !important;
+  transition: all 0.15s ease !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
 }
 
 .nexus-wallet-btn .wallet-adapter-button-trigger:hover {
-  background-color: var(--primary-hover);
-  background-image: none; /* override their default hover */
+  background-color: #EBE9DF !important;
+  border-color: #CFCDBF !important;
 }
 
-/* Wallet adapter modal tweaks */
 .wallet-adapter-modal-wrapper {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
+  background-color: #F8F7F3 !important;
+  border: 1px solid #DDDBCF !important;
+  border-radius: 1.5rem !important;
+  color: #1D221C !important;
+  box-shadow: 0 20px 40px rgba(29, 34, 28, 0.15) !important;
 }
 
 .wallet-adapter-modal-title {
-  color: var(--foreground);
+  color: #1D221C !important;
+  font-family: var(--font-serif) !important;
+  font-size: 1.625rem !important;
+  font-weight: 500 !important;
 }
 
 .wallet-adapter-modal-button-close {
-  background-color: var(--surface-hover);
+  background-color: #EBE9DF !important;
+}
+
+.wallet-adapter-modal-button-close svg {
+  fill: #6C7065 !important;
 }
 
 .wallet-adapter-modal-list .wallet-adapter-button {
-  color: var(--foreground);
+  color: #1D221C !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid #E6E4D9 !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .wallet-adapter-modal-list .wallet-adapter-button:hover {
-  background-color: var(--surface-hover);
+  background-color: #EBE9DF !important;
 }
